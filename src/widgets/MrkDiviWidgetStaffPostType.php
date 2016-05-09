@@ -27,16 +27,6 @@ class MrkDiviWidgetStaffPostType extends DiviCustomWidget
 
         $this->addField(
                 array(
-                    'mrk_staff_listing_search' => array(
-                        'label'             => 'Enable Search',
-                        'type'              => 'yes_no_button',
-                        'description'       => 'Show search form.',
-                        ),
-                )
-        );
-
-        $this->addField(
-                array(
                     'show_staff_paginated_listing' => array(
                                 'label'             => 'Show paginated listing',
                                 'type'              => 'yes_no_button',

@@ -59,38 +59,6 @@
             ?>
 
 
-            @if($mrk_staff_listing_search == 'on')
-            <div class="et_pb_search et_pb_module et_pb_bg_layout_light et_pb_text_align_left  et_pb_search_0">
-                <form role="search" method="get" class="et_pb_searchform" action="/" _lpchecked="1">
-                    <div>
-                        <label class="screen-reader-text" for="s">Search for:</label>
-                        <input type="hidden" name="post_type" value="{{ $custom_post_type }}" />
-                        <input type="text" value="" name="s" class="et_pb_s" style="padding-right: 74px;">
-                        <input type="submit" value="Search" class="et_pb_searchsubmit">
-                    </div>
-                </form>
-            </div>
-            @endif
-
-
-
-
-            <div class="et_pb_filterable_portfolio et_pb_filterable_portfolio_grid clearfix et_pb_module et_pb_bg_layout_light  et_pb_filterable_portfolio_0" style="width:100%;">
-
-            <div class="et_pb_portfolio_filters clearfix" style="width:100%;">
-                <ul class="clearfix">
-                    <li class="et_pb_portfolio_filter et_pb_portfolio_filter_all"><a href="#" class="active" data-category-slug="all">{{ esc_html__( 'All', 'et_builder' ) }}</a></li>
-
-                    @foreach ( $terms as $term  )
-                    <li class="et_pb_portfolio_filter"><a href="#" data-category-slug="{{ esc_attr( urldecode( $term->slug ) ) }}">{{ esc_html( $term->name ) }}</a></li>
-                    @endforeach
-                </ul>
-            </div>
-
-            <div class="et_pb_portfolio_items_wrapper">
-                <div class="et_pb_portfolio_items">
-
-
             @while ($wp_query->have_posts())
                     <?php
                         //Set vars
@@ -118,22 +86,22 @@
                                 );
 
                         $i++;
+
+                        $css_class = 'et_pb_column_12';
+
+                        if($i==4){
+                            $css_class = 'et_pb_column_12 last';
+                            $i=0;
+                        }
+
                     ?>
-                    <div id="post-<?php the_ID(); ?>" <?php post_class( $main_post_class ); ?>>
-                            <?php $shortcode = sprintf('[et_pb_blurb admin_label="Blurb" title="%s" url_new_window="off" use_icon="off"  image="%s" icon_placement="top" animation="off" background_layout="light" text_orientation="center" use_icon_font_size="off" use_border_color="off" border_color="#ffffff" border_style="solid"]
-                                %s
-                         [/et_pb_blurb]', $title, $image, $role);
+                    
+                            <?php $shortcode = sprintf('<div class="et_pb_column et_pb_column_1_4  %s">[et_pb_team_member admin_label="Person" name="%s" position="%s" image_url="%s" animation="off" background_layout="light" use_border_color="off" border_color="#ffffff" border_style="solid" facebook_url="" twitter_url="" google_url="" linkedin_url="" module_class="%s"][/et_pb_team_member]</div>', $css_class, $title, $role , $image, $css_class);
                          ?>
                         {{ do_shortcode( $shortcode ); }}
+                    
 
-
-                    </div>
-
-             @endwhile
-             </div>
-             </div>
-            </div>
-
+            @endwhile
 
 			@if($show_pagination)
 				<div class='et_pb_gallery_pagination'>
@@ -145,8 +113,6 @@
 				</div>
 			@endif
 
-        </div>
-
-				<?php $wp_query = $temp_query; ?>
+		<?php $wp_query = $temp_query; ?>
 
     @endif
