@@ -36,7 +36,7 @@ function custom_post_type_staff()
     $labels = array(
         'name'                  => _x( 'Staffs', 'Post Type General Name', 'text_domain' ),
         'singular_name'         => _x( 'Staff', 'Post Type Singular Name', 'text_domain' ),
-        'menu_name'             => __( 'Staffs', 'text_domain' ),
+        'menu_name'             => __( 'Staff', 'text_domain' ),
         'name_admin_bar'        => __( 'Staff', 'text_domain' ),
         'archives'              => __( 'Item Archives', 'text_domain' ),
         'parent_item_colon'     => __( 'Parent Item:', 'text_domain' ),
@@ -73,7 +73,7 @@ function custom_post_type_staff()
         'supports'              => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'custom-fields', ),
         'taxonomies'            => array( 'staff_taxonomy' ),
         'hierarchical'          => false,
-        'public'                => true,
+        'public'                => false,
         'show_ui'               => true,
         'show_in_menu'          => true,
         'menu_position'         => 5,
@@ -97,7 +97,7 @@ function custom_staff_taxonomy()
     $labels = array(
         'name'                       => _x( 'Staff Categories', 'Taxonomy General Name', 'text_domain' ),
         'singular_name'              => _x( 'Staff', 'Taxonomy Singular Name', 'text_domain' ),
-        'menu_name'                  => __( 'Taxonomy', 'text_domain' ),
+        'menu_name'                  => __( 'Staff categories', 'text_domain' ),
         'all_items'                  => __( 'All Items', 'text_domain' ),
         'parent_item'                => __( 'Parent Item', 'text_domain' ),
         'parent_item_colon'          => __( 'Parent Item:', 'text_domain' ),

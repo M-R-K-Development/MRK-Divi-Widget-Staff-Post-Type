@@ -124,4 +124,4 @@ class MrkDiviWidgetStaffPostType extends ET_Builder_Module
     }
 }
 
-new MrkDiviWidgetStaffPostType($dir);
+new MrkDiviWidgetStaffPostType();
