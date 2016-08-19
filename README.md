@@ -5,8 +5,7 @@ Show all the staff members on one page or have a paginated view. One can enable 
 
 ## Requirements.
 1. Divi Builder Plugin or a theme using the Divi Builder installed and activated.
-2. MRK DIVI Builder Custom Widget plugin installed and activated.
-3. Advanced Custom Fields PRO for adding custom fields for role and email.
+2. Advanced Custom Fields PRO for adding custom fields for role and email.
 
 ##Setup Custom Fields.
 1. Using the ACF plugin create a 'Field Group' for 'staff' post type.

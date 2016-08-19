@@ -12,26 +12,23 @@ if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-global $mrk_divi_custom_widgets_enabler;
+// constants
+define('MRK_STAFF_DIVI_WIDGET_DIR', __DIR__);
+define('MRK_STAFF_DIVI_WIDGET_URL', plugins_url('/'.basename(__DIR__)));
 
-if (! defined('ABSPATH')) {
-    exit; // Exit if accessed directly
-}
-
-// DiviCustomWidget
+require_once MRK_STAFF_DIVI_WIDGET_DIR.'/src/class-mrk-divi-widget-staff-post-type-activate.php';
+register_activation_hook(__FILE__, array('MRK_Divi_Widget_Staff_Post_Type_Activate', 'activate'));
 
 /**
  * Defines variables for
  * @return [type] [description]
  */
-function mrk_divi_widget_staff_post_type()
+function register_mrk_divi_widget_staff_post_type()
 {
-    global $mrk_divi_custom_widgets_enabler;
-    $files = glob(__DIR__.'/src/widgets/*');
-    $mrk_divi_custom_widgets_enabler->addCustomWidgets(array(__DIR__ => $files));
+    require_once MRK_STAFF_DIVI_WIDGET_DIR . '/src/widgets/MrkDiviWidgetStaffPostType.php';
 }
 
-add_filter('mrk_divi_widgets_load', 'mrk_divi_widget_staff_post_type');
+add_action('et_builder_ready', 'register_mrk_divi_widget_staff_post_type', 1);
 
 // Register Custom Post Type - Staff
 function custom_post_type_staff()
@@ -137,26 +134,3 @@ function custom_staff_taxonomy()
     register_taxonomy( 'staff_taxonomy', array( 'staff' ), $args );
 }
 add_action( 'init', 'custom_staff_taxonomy', 0 );
-
-if (!function_exists('check_mrk_module_builder_present')) {
-    function admin_error_notice_mrk_custom_widget_absent()
-    {
-        ?>
-    <div class="notice notice-error is-dismissible">
-        <p><?php _e( 'Staff - Post Type Divi Widget requires MRK DIVI Builder Custom Widget
- active plugin.', 'sample-text-domain' );
-        ?></p>
-    </div>
-    <?php
-
-    }
-
-    function check_mrk_module_builder_present()
-    {
-        if (!class_exists('\\MRKDiviCustomWidgetsEnabler')) { // MRK Custom Widget plugin not installed.
-            add_action( 'admin_notices', 'admin_error_notice_mrk_custom_widget_absent' );
-        }
-    }
-}
-
-add_action('init', 'check_mrk_module_builder_present');
